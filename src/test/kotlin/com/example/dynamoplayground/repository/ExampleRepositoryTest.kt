@@ -4,7 +4,6 @@ import com.example.dynamoplayground.domain.Example
 import com.example.dynamoplayground.vo.Location
 import io.kotest.common.runBlocking
 import kotlinx.coroutines.reactor.awaitSingleOrNull
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -24,6 +23,7 @@ internal class ExampleRepositoryTest @Autowired constructor(
     private fun generateExample(name: String): Example = Example(
         id = UUID.randomUUID().toString(),
         name = name,
-        location = Location(127.35, 36.55)
+        locationList = listOf(Location()),
+        email = "example1@gmail.com"
     )
 }

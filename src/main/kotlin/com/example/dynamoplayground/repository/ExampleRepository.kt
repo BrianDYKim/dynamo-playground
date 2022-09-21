@@ -1,11 +1,13 @@
 package com.example.dynamoplayground.repository
 
 import com.example.dynamoplayground.domain.Example
+import com.example.dynamoplayground.vo.Location
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbAsyncTable
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema
+import software.amazon.awssdk.enhanced.dynamodb.mapper.StaticTableSchema
 
 /**
  * @author Doyeop Kim
@@ -16,7 +18,7 @@ class ExampleRepository(
     private val dynamoDbEnhancedAsyncClient: DynamoDbEnhancedAsyncClient
 ) {
     val asyncTable: DynamoDbAsyncTable<Example> =
-        dynamoDbEnhancedAsyncClient.table("example", TableSchema.fromBean(Example::class.java))
+        dynamoDbEnhancedAsyncClient.table("example", Example.exampleTableSchema)
 
     fun createExample(example: Example): Mono<Void> {
         val createItemFuture = asyncTable.putItem(example)
