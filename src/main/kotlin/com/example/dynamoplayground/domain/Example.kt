@@ -1,5 +1,6 @@
 package com.example.dynamoplayground.domain
 
+import com.example.dynamoplayground.vo.Info
 import com.example.dynamoplayground.vo.Location
 import software.amazon.awssdk.enhanced.dynamodb.EnhancedType
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema
@@ -17,7 +18,7 @@ import java.io.Serializable
  * @since 2022/09/21
  */
 @DynamoDbBean
-class Example(
+data class Example(
     @get:DynamoDbPartitionKey
     @get:DynamoDbAttribute("id")
     var id: String = "",
@@ -25,7 +26,9 @@ class Example(
     @get:DynamoDbAttribute("name")
     var name: String = "",
     @get:DynamoDbAttribute("locationList")
-    var locationList: List<Location> = emptyList()
+    var locationList: List<Location> = emptyList(),
+    @get:DynamoDbAttribute("info")
+    var info: Info = Info()
 ): Serializable {
     companion object {
         // 테이블 스키마를 정의
@@ -43,6 +46,11 @@ class Example(
                 it.name("locationList")
                     .getter(Example::locationList::get)
                     .setter(Example::locationList::set)
+            }
+            .addAttribute(Info.enhancedType) {
+                it.name("info")
+                    .getter(Example::info::get)
+                    .setter(Example::info::set)
             }
             .build()
 
