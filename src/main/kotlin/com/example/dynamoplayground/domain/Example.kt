@@ -24,8 +24,6 @@ class Example(
     @get:DynamoDbSortKey
     @get:DynamoDbAttribute("name")
     var name: String = "",
-    @get:DynamoDbAttribute("email")
-    var email: String = "",
     @get:DynamoDbAttribute("locationList")
     var locationList: List<Location> = emptyList()
 ): Serializable {

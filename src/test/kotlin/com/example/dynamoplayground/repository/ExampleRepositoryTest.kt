@@ -24,6 +24,5 @@ internal class ExampleRepositoryTest @Autowired constructor(
         id = UUID.randomUUID().toString(),
         name = name,
         locationList = listOf(Location()),
-        email = "example1@gmail.com"
     )
 }
